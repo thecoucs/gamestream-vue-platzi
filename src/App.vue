@@ -1,6 +1,7 @@
 <script setup>
 import LayoutHero from './components/Layout/LayoutHero.vue'
 import GameCard from './components/Games/GameCard.vue'
+import GameLayout from './components/Games/GameLayout.vue'
 import { onMounted, reactive } from 'vue'
 
 const API_URL = 'https://gamestreamapi.herokuapp.com/api/games'
@@ -32,7 +33,10 @@ onMounted(() => {
 
 <template>
   <LayoutHero />
-  <GameCard v-for="game in state.data" :key="game.title" :game="game"/>
+  <GameLayout>
+
+    <GameCard v-for="game in state.data" :key="game.title" :game="game"/>
+  </GameLayout>
   <main></main>
 </template>
 
