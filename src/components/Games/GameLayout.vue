@@ -4,13 +4,11 @@ defineProps({
   games: Array,
 })
 
-
 </script>
 
 <template>
   <section>
     <h2>Recent games</h2>
-    <SharedSearch v-model="searchInput" @search="searchGames" />
     <div class="game-layout">
 
     </div>
