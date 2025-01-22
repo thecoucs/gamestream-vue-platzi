@@ -46,7 +46,9 @@ const setGameView = (filteredGames) => {
     <GameLayout :games="state.data" @set-game-view="setGameView">
       <GameCard v-for="game in gamesView" :key="game.title" :game="game"/>
     </GameLayout>
-    <GameModal/>
+    <Teleport to="body">
+      <GameModal/>
+    </Teleport>
   </main>
 </template>
 
