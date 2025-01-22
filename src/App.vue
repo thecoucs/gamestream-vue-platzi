@@ -2,6 +2,7 @@
 import LayoutHero from './components/Layout/LayoutHero.vue'
 import GameCard from './components/Games/GameCard.vue'
 import GameLayout from './components/Games/GameLayout.vue'
+import GameModal from './components/Games/GameModal.vue'
 import { onMounted, reactive, ref } from 'vue'
 
 const API_URL = 'https://gamestreamapi.herokuapp.com/api/games'
@@ -41,10 +42,12 @@ const setGameView = (filteredGames) => {
 
 <template>
   <LayoutHero />
-  <GameLayout :games="state.data" @set-game-view="setGameView">
-    <GameCard v-for="game in gamesView" :key="game.title" :game="game"/>
-  </GameLayout>
-  <main></main>
+  <main>
+    <GameLayout :games="state.data" @set-game-view="setGameView">
+      <GameCard v-for="game in gamesView" :key="game.title" :game="game"/>
+    </GameLayout>
+    <GameModal/>
+  </main>
 </template>
 
 <style scoped>
