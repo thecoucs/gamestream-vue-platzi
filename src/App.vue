@@ -2,7 +2,7 @@
 import LayoutHero from './components/Layout/LayoutHero.vue'
 import GameCard from './components/Games/GameCard.vue'
 import GameLayout from './components/Games/GameLayout.vue'
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 
 const API_URL = 'https://gamestreamapi.herokuapp.com/api/games'
 
@@ -12,12 +12,15 @@ const state = reactive({
   data: [],
 })
 
+const gamesView = ref([])
+
 const fetchGames = async () => {
   try {
     state.isLoading = true
     const response = await fetch(API_URL)
     const json = await response.json()
     state.data = json
+    gamesView.value = json
   } catch (error) {
     console.error(error)
     state.error = error
@@ -29,13 +32,17 @@ const fetchGames = async () => {
 onMounted(() => {
   fetchGames()
 })
+
+
+const setGameView = (filteredGames) => {
+  gamesView.value = filteredGames
+}
 </script>
 
 <template>
   <LayoutHero />
-  <GameLayout>
-
-    <GameCard v-for="game in state.data" :key="game.title" :game="game"/>
+  <GameLayout :games="state.data" @set-game-view="setGameView">
+    <GameCard v-for="game in gamesView" :key="game.title" :game="game"/>
   </GameLayout>
   <main></main>
 </template>
