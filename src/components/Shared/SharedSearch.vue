@@ -1,12 +1,14 @@
 <script setup>
 import IconSearch from '../Icons/IconSearch.vue'
-
+const model = defineModel()
 </script>
 
 <template>
   <form>
+    {{ input }}
     <div class="search" :class="classes" >
       <input
+        v-model="model"
         class="search__input"
         type="text"
         placeholder="Buscar"

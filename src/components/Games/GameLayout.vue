@@ -1,8 +1,9 @@
 <script setup>
-import { useSlots } from 'vue'
+import { ref, useSlots } from 'vue'
 import SharedSearch from '../Shared/SharedSearch.vue';
 
 const slots = useSlots()
+const searchInput = ref('')
 
 </script>
 
@@ -11,7 +12,7 @@ const slots = useSlots()
     <slot name="title" />
     <h2 v-if="slots.title === undefined">Recent games</h2>
     <div class="game-layout">
-      <SharedSearch class="my-class" id="search-form"/>
+      <SharedSearch v-model="searchInput" class="my-class" id="search-form"/>
       <slot />
     </div>
   </section>
